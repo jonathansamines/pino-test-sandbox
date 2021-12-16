@@ -13,5 +13,15 @@ const loggerB = pino({
     },
 });
 
+const loggerC = pino({
+    transport: {
+        pipeline: [
+            { target: path.resolve(__dirname, './transport-transform' ) },
+            { target: path.resolve(__dirname, './transport-simple.js') }
+        ],
+    }
+});
+
 loggerA.info('message a');
 loggerB.info('message b');
+loggerC.info('message c');
